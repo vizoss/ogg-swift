@@ -39,6 +39,7 @@ wget $liboggDownload >> $logfile
 unzip `basename $liboggDownload` >> $logfile
 
 liboggDir=`basename $liboggDownload | sed "s/\.zip$//"` 
+
 cd $liboggDir
 ./configure >> $logfile
 
