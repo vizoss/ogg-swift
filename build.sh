@@ -28,7 +28,7 @@
 # Usage: no parameters, settings mostly defined in xcode project
 # 
 
-opts="SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO" 
+opts="SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO"
 
 dd=./DerivedData
 archivesPath="$dd/Archives"
@@ -47,25 +47,25 @@ scheme=ogg-swift
 
 platform=iphoneos
 echo "building for $platform ..."
-xcodebuild archive -scheme $scheme -sdk $platform -destination="iOS" -derivedDataPath $dd \
+xcodebuild archive -scheme $scheme -destination 'generic/platform=iOS' -derivedDataPath $dd \
     -archivePath "$archivesPath/$platform.xcarchive" $opts > "build-$platform.log"
 cp -R "$archivesPath/$platform.xcarchive/$generatedPath" "$builtPath/Archive-$platform"
 
 platform=iphonesimulator
 echo "building for $platform ..."
-xcodebuild archive -scheme $scheme -sdk $platform -destination="iOS Simulator" -derivedDataPath $dd \
+xcodebuild archive -scheme $scheme -destination 'generic/platform=iOS Simulator' -derivedDataPath $dd \
     -archivePath "$archivesPath/$platform.xcarchive" $opts > "build-$platform.log"
 cp -R "$archivesPath/$platform.xcarchive/$generatedPath" "$builtPath/Archive-$platform"
 
 platform=maccatalyst
 echo "building for $platform ..."
-xcodebuild archive -scheme $scheme -sdk macosx -destination 'generic/platform=macOS,variant=Mac Catalyst,name=Any Mac' -derivedDataPath $dd \
+xcodebuild archive -scheme $scheme -destination 'generic/platform=macOS,variant=Mac Catalyst' -derivedDataPath $dd \
     -archivePath "$archivesPath/$platform.xcarchive" $opts > "build-$platform.log"
 cp -R "$archivesPath/$platform.xcarchive/$generatedPath" "$builtPath/Archive-$platform"
 
 platform=macosx
 echo "building for $platform ..."
-xcodebuild archive -scheme $scheme -sdk $platform -destination='My Mac' -derivedDataPath $dd \
+xcodebuild archive -scheme $scheme -destination 'generic/platform=macOS' -derivedDataPath $dd \
     -archivePath "$archivesPath/$platform.xcarchive" $opts > "build-$platform.log"
 cp -R "$archivesPath/$platform.xcarchive/$generatedPath" "$builtPath/Archive-$platform"
 

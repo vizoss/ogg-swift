@@ -35,10 +35,19 @@ here=$(pwd)
 logfile="$here/prepare.log"
 rm -rf libogg* > $logfile
 
-wget $liboggDownload >> $logfile
-unzip `basename $liboggDownload` >> $logfile
+# make sure the target directories referenced by ogg-swift.xcodeproj exist
+mkdir -p include src
 
-liboggDir=`basename $liboggDownload | sed "s/\.zip$//"` 
+# download with wget if available, otherwise fall back to curl (CI runners ship curl)
+archive=`basename $liboggDownload`
+if command -v wget >/dev/null 2>&1; then
+    wget "$liboggDownload" >> $logfile 2>&1
+else
+    curl -L -o "$archive" "$liboggDownload" >> $logfile 2>&1
+fi
+unzip -o "$archive" >> $logfile
+
+liboggDir=`basename $liboggDownload | sed "s/\.zip$//"`
 
 cd $liboggDir
 ./configure >> $logfile

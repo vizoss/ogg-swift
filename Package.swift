@@ -18,8 +18,8 @@ let package = Package(
     ],
     targets: [
         .binaryTarget(
-            name: "YbridOgg", 
-            url: "https://github.com/ybrid/ogg-swift/releases/download/"+version+"/YbridOgg.xcframework.zip",
+            name: "YbridOgg",
+            url: "https://github.com/vizoss/ogg-swift/releases/download/"+version+"/YbridOgg.xcframework.zip",
             checksum: "871547dc18a2c7257dc9711203afa523117c845cc73fc49b0e1fc7d32667f543"
             )
     ]
