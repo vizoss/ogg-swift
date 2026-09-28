@@ -80,6 +80,15 @@ echo "generating $xcFramework for \n$products\n..."
 cmd="xcodebuild -quiet -create-xcframework "
 for entry in $products; do
     cmd="$cmd -framework $builtPath/$entry/$framework "
+    # The archive contains the matching dSYM at its root.  Include it in the
+    # XCFramework so downstream app archives can upload usable crash symbols.
+    platform=${entry#Archive-}
+    dsymPath="$archivesPath/$platform.xcarchive/dSYMs/$framework.dSYM"
+    if [ -d "$dsymPath" ]; then
+        cmd="$cmd -debug-symbols $dsymPath "
+    else
+        echo "warning: dSYM not found for $platform: $dsymPath"
+    fi
 done
 cmd="$cmd -output $xcFramework"
 #echo $cmd
