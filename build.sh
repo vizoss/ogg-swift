@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Do not continue to package an incomplete archive.  Without this, a failed
+# build leaves no XCFramework directory and the subsequent LICENSE copy creates
+# a file named YbridOgg.xcframework, which is then published as a corrupt ZIP.
+set -e
+
 
 # MIT License
 

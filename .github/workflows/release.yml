@@ -57,6 +57,7 @@ jobs:
           chmod +x build.sh
           ./build.sh
           test -f YbridOgg.xcframework.zip
+          unzip -Z1 YbridOgg.xcframework.zip | grep -qx 'YbridOgg.xcframework/Info.plist'
 
       - name: Compute checksum
         id: sum
