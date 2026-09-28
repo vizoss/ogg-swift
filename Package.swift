@@ -3,7 +3,7 @@
 
 import PackageDescription
 
-let version = "0.8.1"
+let version = "0.8.2"
 let package = Package(
     name: "YbridOgg",
     platforms: [
@@ -20,7 +20,7 @@ let package = Package(
         .binaryTarget(
             name: "YbridOgg",
             url: "https://github.com/vizoss/ogg-swift/releases/download/"+version+"/YbridOgg.xcframework.zip",
-            checksum: "746eab1456675666f790b7bfbb2f33759063cd62b247269bc50cebfddb83f136"
+            checksum: "3ae6613881da82b681dc438f7d733a5dc644a84601b53cc9e8e0c81cb3d30687"
             )
     ]
 )
