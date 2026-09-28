@@ -35,7 +35,8 @@ set -e
 
 opts="SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES ENABLE_BITCODE=NO CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO"
 
-dd=./DerivedData
+# xcodebuild -create-xcframework requires an absolute path for -debug-symbols.
+dd="$(pwd)/DerivedData"
 archivesPath="$dd/Archives"
 generatedPath="Products/Library/Frameworks"
 
